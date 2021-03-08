@@ -18,6 +18,7 @@ apt -y install \
   cmake \
   cppcheck \
   curl \
+  doxygen \
   g++-8 \
   git \
   gnupg \
@@ -130,6 +131,11 @@ else
   sh tools/code_check.sh 2>&1
   cd build
 fi
+echo ::endgroup::
+
+echo ::group::Documentation check
+make doc 2>&1
+bash <(curl -s https://raw.githubusercontent.com/ignitionrobotics/ign-cmake/ign-cmake2/tools/doc_check.sh)
 echo ::endgroup::
 
 if [ -f "$SCRIPT_BETWEEN_CMAKE_MAKE" ] || [ -f "$SCRIPT_BETWEEN_CMAKE_MAKE_VERSIONED" ] ; then
